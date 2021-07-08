@@ -10,11 +10,10 @@ class Musics {
 //UI constructor
 class UI {
 
+     //Define and create element
     addMusic(music) {
-        //Define and create element
         const task = document.querySelector('.task');
         const li = document.createElement('li');
-        
 
         //Add class to element
         li.className = 'mstyle';
@@ -34,20 +33,19 @@ class UI {
         li.appendChild(remove);
     
         task.appendChild(li);
+}
 
-    }
-
-    //Method to remove li from list-area  
+     
     removeMusics(target) {
+        //Method to remove li from list-area 
         if(target.parentElement.classList.contains ('delete-item')) {
             target.parentElement.parentElement.remove();
-         
         }
     }
 
-    //Method to show alert-empty input
-    showAlert() {
-        let alerts = document.querySelector('.alerts');
+  //Method to show alert-empty input
+    showAlert() { 
+        let alerts = document.querySelector('#alerts');
 
         const div = document.createElement('div');
 
@@ -56,13 +54,12 @@ class UI {
         div.appendChild(document.createTextNode( "Please input artist or song so we can jam!!"));
 
         alerts.appendChild(div);
-
-        let handle = setTimeout( function() {alerts.removeChild(div);}, 3000);
-        clearTimeout(handle);
-
-        }
-    } 
-
+        
+        setTimeout( function() {
+          $('.alertstyle').delay(1000).fadeOut();
+    });
+  }   
+}
 //Storage constructor
 class Storing {
 
@@ -102,13 +99,15 @@ class Storing {
     static deleteMusics(music) {
 
         const musics = Storing.getMusic();
+       
         
-        musics.forEach(function(music, index) {
-            if(`${music.song} === ${music.song}`) {
-                musics.splice(index, 1);
-                console.log(`${music.song}`);
-            }
-        });
+       
+        // musics.forEach(function(music, index) {
+        //     if() {
+            
+        //         console.log(`${music.song}`);
+        //     }
+        // });
 
         localStorage.setItem('musics', JSON.stringify(musics));
 
@@ -129,17 +128,17 @@ const music = new Musics(artist, song);
 
 const ui = new UI();
 
+if(artist.length == 0 && song.length == 0) {
+    ui.showAlert();
+  } else {
+      document.querySelector('#artistname').value = '';
+      document.querySelector('#songname').value = '';
+  
 ui.addMusic(music);
 
 Storing.addMusicToStorage(music);
+  }
 
-if(artist === '' && song === '') {
-  ui.showAlert();
-} else {
-    document.querySelector('#artistname').value = '';
-    document.querySelector('#songname').value = '';
-    
-}
 
 e.preventDefault();
 

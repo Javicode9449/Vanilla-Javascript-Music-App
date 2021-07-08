@@ -1,3 +1,12 @@
+.alertstyle {
+    background-color: rgb(204, 71, 71, 0.5);
+    border-color: black;
+    border-style: dotted;
+    border-radius: 20px;
+    color: yellow;
+    font-size: 30px;
+}
+
 .col-wrapper {
     padding: 20px;
 }
